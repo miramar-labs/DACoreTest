@@ -106,7 +106,7 @@ namespace DACoreTest
 			mMgr->deleteTower(mHistPI, mTowerDTPRIME);
 		}
 
-		TEST_METHOD(TestScenarioIncomplete){
+		TEST_METHOD(ScenarioIncomplete){
 
 			mMgr->getTower(mTowerDTPRIME)->getConfig()->setIsIncomplete(true);
 
@@ -119,7 +119,7 @@ namespace DACoreTest
 			delete advice;
 		}
 
-		TEST_METHOD(TestScenarioInactive){
+		TEST_METHOD(ScenarioInactive){
 
 			mMgr->getTower(mTowerDTPRIME)->getConfig()->setIsInactive(true);
 
@@ -133,7 +133,7 @@ namespace DACoreTest
 
 		}
 
-		TEST_METHOD(TestScenarioOverheadCompUnstable){
+		TEST_METHOD(ScenarioOverheadCompUnstable){
 
 			IInstrumentsData* idata = mMgr->getTower(mTowerDTPRIME)->getData()->getPrimaryInstruments();
 
@@ -151,7 +151,7 @@ namespace DACoreTest
 
 		}
 
-		TEST_METHOD(TestScenarioBottomsCompUnstable){
+		TEST_METHOD(ScenarioBottomsCompUnstable){
 
 			IInstrumentsData* idata = mMgr->getTower(mTowerDTPRIME)->getData()->getPrimaryInstruments();
 
@@ -169,7 +169,7 @@ namespace DACoreTest
 
 		}
 
-		TEST_METHOD(TestScenarioBothCompUnstable){
+		TEST_METHOD(ScenarioBothCompUnstable){
 
 			IInstrumentsData* idata = mMgr->getTower(mTowerDTPRIME)->getData()->getPrimaryInstruments();
 
@@ -187,7 +187,7 @@ namespace DACoreTest
 
 		}
 
-		TEST_METHOD(TestScenario1){
+		TEST_METHOD(Scenario1){
 
 			ITowerData* tdata = mMgr->getTower(mTowerDTPRIME)->getData();
 
@@ -212,7 +212,7 @@ namespace DACoreTest
 			delete advice;
 		}
 
-		TEST_METHOD(TestScenario2){
+		TEST_METHOD(Scenario2){
 
 			ITowerData* tdata = mMgr->getTower(mTowerDTPRIME)->getData();
 
@@ -236,7 +236,7 @@ namespace DACoreTest
 			delete advice;
 		}
 
-		TEST_METHOD(TestScenario3){
+		TEST_METHOD(Scenario3){
 
 			ITowerData* tdata = mMgr->getTower(mTowerDTPRIME)->getData();
 
@@ -261,7 +261,7 @@ namespace DACoreTest
 			delete advice;
 		}
 
-		TEST_METHOD(TestScenario4){
+		TEST_METHOD(Scenario4){
 
 			ITowerData* tdata = mMgr->getTower(mTowerDTPRIME)->getData();
 
@@ -286,7 +286,7 @@ namespace DACoreTest
 			delete advice;
 		}
 
-		TEST_METHOD(TestScenario5){
+		TEST_METHOD(Scenario5){
 
 			ITowerData* tdata = mMgr->getTower(mTowerDTPRIME)->getData();
 
@@ -312,7 +312,7 @@ namespace DACoreTest
 			delete advice;
 		}
 
-		TEST_METHOD(TestScenario6){
+		TEST_METHOD(Scenario6){
 
 			IAdvice* advice = mMgr->getAdvice(mTowerDTPRIME);
 
@@ -331,7 +331,7 @@ namespace DACoreTest
 			delete advice;
 		}
 
-		TEST_METHOD(TestScenario7){
+		TEST_METHOD(Scenario7){
 
 			ITowerData* tdata = mMgr->getTower(mTowerDTPRIME)->getData();
 
@@ -355,7 +355,7 @@ namespace DACoreTest
 			delete advice;
 		}
 
-		TEST_METHOD(TestScenario8){
+		TEST_METHOD(Scenario8){
 
 			ITowerData* tdata = mMgr->getTower(mTowerDTPRIME)->getData();
 
@@ -380,7 +380,7 @@ namespace DACoreTest
 			delete advice;
 		}
 
-		TEST_METHOD(TestScenario9a){
+		TEST_METHOD(Scenario9a){
 
 			ITowerData* tdata = mMgr->getTower(mTowerDTPRIME)->getData();
 
@@ -406,7 +406,7 @@ namespace DACoreTest
 
 		}
 
-		TEST_METHOD(TestScenario9b){
+		TEST_METHOD(Scenario9b){
 
 			ITowerData* tdata = mMgr->getTower(mTowerDTPRIME)->getData();
 
@@ -430,11 +430,11 @@ namespace DACoreTest
 
 		}
 
-		TEST_METHOD(TestScenarioAdviceForPressure){
+		TEST_METHOD(ScenarioAdviceForPressure){
 			Assert::Fail();	//TODO
 		}
 
-		TEST_METHOD(TestScenarioNoAdvice){
+		TEST_METHOD(ScenarioNoAdvice){
 
 			ITowerData* tdata = mMgr->getTower(mTowerDTPRIME)->getData();
 
