@@ -58,6 +58,12 @@ namespace DACoreTest
 		const std::string OVH_COMP_UNSTABLE = "Overhead composition unstable. No advice at this time.";
 		const std::string BOTTOMS_COMP_UNSTABLE = "Bottoms composition unstable. No advice at this time.";
 		const std::string OVH_AND_BOTTOMS_COMP_UNSTABLE = "Overhead and Bottoms compositions unstable. No advice at this time.";
+		const std::string DECREASE_BOTH_REBOIL_AND_REFLUX = "Decrease the heating medium/Feed Ratio and Decrease Reflux Flow";
+		const std::string INCREASE_BOTH_REBOIL_AND_REFLUX = "Increase heating medium FIC and Increase Reflux flow";
+		const std::string DECREASE_REBOIL = "Decrease the heating medium/Feed Ratio";
+		const std::string INCREASE_REFLUX = "Increase Reflux flow";
+		const std::string DECREASE_REFLUX = "Decrease Reflux Flow";
+		const std::string INCREASE_REBOIL = "Increase heating medium FIC";
 
 		//TODO - FIXME
 		const std::string ScenarioIncompleteID = "Incomplete";
@@ -100,8 +106,8 @@ namespace DACoreTest
 			mMgr->deleteTower(mHistPI, mTowerDTPRIME);
 		}
 
-		TEST_METHOD(TestScenarioIncomplete)
-		{
+		TEST_METHOD(TestScenarioIncomplete){
+
 			mMgr->getTower(mTowerDTPRIME)->getConfig()->setIsIncomplete(true);
 
 			IAdvice* advice = mMgr->getAdvice(mTowerDTPRIME);
@@ -193,20 +199,15 @@ namespace DACoreTest
 
 			Logger::WriteMessage(advice->getPrimaryMessage().c_str());
 
-			if (advice->getAlgorithmId() == Scenario1ID){
+			Assert::AreEqual(advice->getAlgorithmId(), Scenario1ID);
 
-				Assert::AreEqual(advice->getPrimaryMessage().c_str(),  "Consider trying: Decrease the heating medium/Feed Ratio and Decrease Reflux Flow");
-				Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::DECREASE_BOTH_REBOIL_AND_REFLUX);
+			Assert::AreEqual(advice->getPrimaryMessage().c_str(), DECREASE_BOTH_REBOIL_AND_REFLUX.c_str());
+			Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::DECREASE_BOTH_REBOIL_AND_REFLUX);
 
-				Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
+			Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
 
-				//TODO Assert::AreEqual(advice->getSecondaryMessage()==NULL);
-				//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::INVALID);
-
-				Logger::WriteMessage("**** PASS: testScenario1");
-			}
-			else
-				Logger::WriteMessage("**** FAIL: testScenario1");
+			//TODO Assert::AreEqual(advice->getSecondaryMessage()==NULL);
+			//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::INVALID);
 
 			delete advice;
 		}
@@ -222,20 +223,15 @@ namespace DACoreTest
 
 			Logger::WriteMessage(advice->getPrimaryMessage().c_str());
 
-			if (advice->getAlgorithmId() == Scenario2ID){
+			Assert::AreEqual(advice->getAlgorithmId(), Scenario2ID);
 
-				Assert::AreEqual(advice->getPrimaryMessage().c_str(),  "Increase heating medium FIC and Increase Reflux Flow");
-				Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::INCREASE_BOTH_REBOIL_AND_REFLUX);
+			Assert::AreEqual(advice->getPrimaryMessage().c_str(), INCREASE_BOTH_REBOIL_AND_REFLUX.c_str());
+			Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::INCREASE_BOTH_REBOIL_AND_REFLUX);
 
-				Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
+			Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
 
-				//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
-				//TODO Assert::AreEqual(advice->getSecondaryMessageType()==);
-
-				Logger::WriteMessage("**** PASS: testScenario2");
-			}
-			else
-				Logger::WriteMessage("**** FAIL: testScenario2");
+			//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
+			//TODO Assert::AreEqual(advice->getSecondaryMessageType()==);
 
 			delete advice;
 		}
@@ -252,20 +248,15 @@ namespace DACoreTest
 
 			Logger::WriteMessage(advice->getPrimaryMessage().c_str());
 
-			if (advice->getAlgorithmId() == Scenario3ID){
+			Assert::AreEqual(advice->getAlgorithmId(), Scenario3ID);
 
-				Assert::AreEqual(advice->getPrimaryMessage().c_str(),  "Decrease the heating medium/Feed Ratio and Decrease Reflux Flow");
-				Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::DECREASE_BOTH_REBOIL_AND_REFLUX);
+			Assert::AreEqual(advice->getPrimaryMessage().c_str(), DECREASE_BOTH_REBOIL_AND_REFLUX.c_str());
+			Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::DECREASE_BOTH_REBOIL_AND_REFLUX);
 
-				Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
+			Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
 
-				//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
-				//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::);
-
-				Logger::WriteMessage("**** PASS: testScenario3");
-			}
-			else
-				Logger::WriteMessage("**** FAIL: testScenario3");
+			//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
+			//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::);
 
 			delete advice;
 		}
@@ -282,20 +273,15 @@ namespace DACoreTest
 
 			Logger::WriteMessage(advice->getPrimaryMessage().c_str());
 
-			if (advice->getAlgorithmId() == Scenario4ID){
+			Assert::AreEqual(advice->getAlgorithmId(), Scenario4ID);
 
-				Assert::AreEqual(advice->getPrimaryMessage().c_str(),  "Decrease the heating medium/Feed Ratio");
-				Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::DECREASE_REBOIL);
+			Assert::AreEqual(advice->getPrimaryMessage().c_str(),  DECREASE_REBOIL.c_str());
+			Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::DECREASE_REBOIL);
 
-				Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
+			Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
 
-				//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
-				//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::);
-
-				Logger::WriteMessage("**** PASS: testScenario4");
-			}
-			else
-				Logger::WriteMessage("**** FAIL: testScenario4");
+			//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
+			//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::);
 
 			delete advice;
 		}
@@ -313,20 +299,15 @@ namespace DACoreTest
 
 			Logger::WriteMessage(advice->getPrimaryMessage().c_str());
 
-			if (advice->getAlgorithmId() == Scenario5ID){
+			Assert::AreEqual(advice->getAlgorithmId(), Scenario5ID);
 
-				Assert::AreEqual(advice->getPrimaryMessage().c_str(),  "Increase Reflux Flow");
-				Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::INCREASE_REFLUX);
+			Assert::AreEqual(advice->getPrimaryMessage().c_str(),  INCREASE_REFLUX.c_str());
+			Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::INCREASE_REFLUX);
 
-				Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
+			Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
 
-				//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
-				//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::);
-
-				Logger::WriteMessage("**** PASS: testScenario5");
-			}
-			else
-				Logger::WriteMessage("**** FAIL: testScenario5");
+			//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
+			//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::);
 
 			delete advice;
 		}
@@ -337,20 +318,15 @@ namespace DACoreTest
 
 			Logger::WriteMessage(advice->getPrimaryMessage().c_str());
 
-			if (advice->getAlgorithmId() == Scenario6ID){
+			Assert::AreEqual(advice->getAlgorithmId(), Scenario6ID);
 
-				Assert::AreEqual(advice->getPrimaryMessage().c_str(),  "Decrease Reflux Flow");
-				Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::DECREASE_REFLUX);
+			Assert::AreEqual(advice->getPrimaryMessage().c_str(), DECREASE_REFLUX.c_str());
+			Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::DECREASE_REFLUX);
 
-				Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
+			Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
 
-				//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
-				//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::);
-
-				Logger::WriteMessage("**** PASS: testScenario6");
-			}
-			else
-				Logger::WriteMessage("**** FAIL: testScenario6");
+			//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
+			//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::);
 
 			delete advice;
 		}
@@ -366,20 +342,15 @@ namespace DACoreTest
 
 			Logger::WriteMessage(advice->getPrimaryMessage().c_str());
 
-			if (advice->getAlgorithmId() == Scenario7ID){
+			Assert::AreEqual(advice->getAlgorithmId(), Scenario7ID);
 
-				Assert::AreEqual(advice->getPrimaryMessage().c_str(),  "Increase heating medium FIC");
-				Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::INCREASE_REBOIL);
+			Assert::AreEqual(advice->getPrimaryMessage().c_str(), INCREASE_REBOIL.c_str());
+			Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::INCREASE_REBOIL);
 
-				Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
+			Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
 
-				//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
-				//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::);
-
-				Logger::WriteMessage("**** PASS: testScenario7");
-			}
-			else
-				Logger::WriteMessage("**** FAIL: testScenario7");
+			//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
+			//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::);
 
 			delete advice;
 		}
@@ -396,20 +367,15 @@ namespace DACoreTest
 
 			Logger::WriteMessage(advice->getPrimaryMessage().c_str());
 
-			if (advice->getAlgorithmId() == Scenario8ID){
+			Assert::AreEqual(advice->getAlgorithmId(), Scenario8ID);
 
-				Assert::AreEqual(advice->getPrimaryMessage().c_str(),  "Decrease Reflux Flow");
-				Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::DECREASE_REFLUX);
+			Assert::AreEqual(advice->getPrimaryMessage().c_str(), DECREASE_REFLUX.c_str());
+			Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::DECREASE_REFLUX);
 
-				Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
+			Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
 
-				//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
-				//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::INVALID);
-
-				Logger::WriteMessage("**** PASS: testScenario8");
-			}
-			else
-				Logger::WriteMessage("**** FAIL: testScenario8");
+			//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
+			//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::INVALID);
 
 			delete advice;
 		}
@@ -426,20 +392,15 @@ namespace DACoreTest
 
 			Logger::WriteMessage(advice->getPrimaryMessage().c_str());
 
-			if (advice->getAlgorithmId() == Scenario9ID){
+			Assert::AreEqual(advice->getAlgorithmId(), Scenario9ID);
 
-				Assert::AreEqual(advice->getPrimaryMessage().c_str(),  "Decrease the heating medium/Feed Ratio");
-				Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::DECREASE_REBOIL);
+			Assert::AreEqual(advice->getPrimaryMessage().c_str(), DECREASE_REBOIL.c_str());
+			Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::DECREASE_REBOIL);
 
-				Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
+			Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
 
-				//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
-				//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::INVALID);
-
-				Logger::WriteMessage("**** PASS: testScenario9a");
-			}
-			else
-				Logger::WriteMessage("**** FAIL: testScenario9a");
+			//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
+			//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::INVALID);
 
 			delete advice;
 
@@ -455,27 +416,22 @@ namespace DACoreTest
 
 			Logger::WriteMessage(advice->getPrimaryMessage().c_str());
 
-			if (advice->getAlgorithmId() == Scenario9ID){
+			Assert::AreEqual(advice->getAlgorithmId(), Scenario9ID);
 
-				Assert::AreEqual(advice->getPrimaryMessage().c_str(),  "Decrease the heating medium/Feed Ratio");
-				Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::DECREASE_REBOIL);
+			Assert::AreEqual(advice->getPrimaryMessage().c_str(), DECREASE_REBOIL.c_str());
+			Assert::AreEqual(advice->getPrimaryMessageType(), IAdvice::MessageType::DECREASE_REBOIL);
 
-				Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
+			Assert::AreEqual(advice->getSeverity(), IAdvice::Severity::RED);
 
-				//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
-				//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::INVALID);
-
-				Logger::WriteMessage("**** PASS: testScenario9b");
-			}
-			else
-				Logger::WriteMessage("**** FAIL: testScenario9b");
+			//TODO Assert::AreEqual(advice->getSecondaryMessage()=="ERROR- Delta Pressure is reading too low for current load on column, negatively impacting some decisions.");
+			//TODO Assert::AreEqual(advice->getSecondaryMessageType()==IAdvice::MessageType::INVALID);
 
 			delete advice;
 
 		}
 
 		TEST_METHOD(TestScenarioAdviceForPressure){
-
+			Assert::Fail();	//TODO
 		}
 
 		TEST_METHOD(TestScenarioNoAdvice){
@@ -489,12 +445,7 @@ namespace DACoreTest
 
 			Logger::WriteMessage(advice->getPrimaryMessage().c_str());
 
-			if (advice->getAlgorithmId() == ScenarioNoAdviceID){
-
-				Logger::WriteMessage("**** PASS: testScenarioNoAdvice");
-			}
-			else
-				Logger::WriteMessage("**** FAIL: testScenarioNoAdvice");
+			Assert::AreEqual(advice->getAlgorithmId(), ScenarioNoAdviceID);
 
 			delete advice;
 		}
