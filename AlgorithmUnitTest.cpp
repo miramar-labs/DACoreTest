@@ -92,7 +92,7 @@ namespace DACoreTest
 
 		TEST_CLASS_CLEANUP(DACoreCleanup){
 
-			//TODO: cleanup mHistPI;
+			mMgr->deleteHistorian(mHistPI);
 		}
 
 		TEST_METHOD_INITIALIZE(TestInit){
