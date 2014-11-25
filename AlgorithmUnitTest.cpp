@@ -137,8 +137,8 @@ namespace DACoreTest
 
 		TEST_METHOD(ScenarioOverheadCompUnstable){
 
-			DATA_PINST(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(121.7);
-			DATA_PINST(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.3);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(121.7);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.3);
 
 			IAdvice* advice = mMgr->getAdvice(mTowerDTPRIME);
 
@@ -152,8 +152,8 @@ namespace DACoreTest
 
 		TEST_METHOD(ScenarioBottomsCompUnstable){
 
-			DATA_PINST(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(92.15);
-			DATA_PINST(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.10);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(92.15);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.10);
 
 			IAdvice* advice = mMgr->getAdvice(mTowerDTPRIME);
 
@@ -167,8 +167,8 @@ namespace DACoreTest
 
 		TEST_METHOD(ScenarioBothCompUnstable){
 
-			DATA_PINST(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(121.7);
-			DATA_PINST(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.10);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(121.7);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.10);
 
 			IAdvice* advice = mMgr->getAdvice(mTowerDTPRIME);
 
@@ -182,8 +182,8 @@ namespace DACoreTest
 
 		TEST_METHOD(Scenario1){
 
-			DATA_PINST(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(99.5);
-			DATA_PINST(TOWER(mTowerDTPRIME))->setTowerDeltaPressureOrTemperature(3.48);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(99.5);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setTowerDeltaPressureOrTemperature(3.48);
 
 			IAdvice* advice = mMgr->getAdvice(mTowerDTPRIME);
 
@@ -204,7 +204,7 @@ namespace DACoreTest
 
 		TEST_METHOD(Scenario2){
 
-			DATA_PINST(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(98.5);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(98.5);
 
 			IAdvice* advice = mMgr->getAdvice(mTowerDTPRIME);
 
@@ -225,8 +225,8 @@ namespace DACoreTest
 
 		TEST_METHOD(Scenario3){
 
-			DATA_PINST(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(93.17);
-			DATA_PINST(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.3);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(93.17);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.3);
 
 			IAdvice* advice = mMgr->getAdvice(mTowerDTPRIME);
 
@@ -247,8 +247,8 @@ namespace DACoreTest
 
 		TEST_METHOD(Scenario4){
 
-			DATA_PINST(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(98.5);
-			DATA_PINST(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.6);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(98.5);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.6);
 
 			IAdvice* advice = mMgr->getAdvice(mTowerDTPRIME);
 
@@ -269,9 +269,9 @@ namespace DACoreTest
 
 		TEST_METHOD(Scenario5){
 
-			DATA_PINST(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(99.5);
-			DATA_PINST(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.68);
-			DATA_PINST(TOWER(mTowerDTPRIME))->setTowerDeltaPressureOrTemperature(1.9);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(99.5);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.68);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setTowerDeltaPressureOrTemperature(1.9);
 
 			IAdvice* advice = mMgr->getAdvice(mTowerDTPRIME);
 
@@ -313,7 +313,7 @@ namespace DACoreTest
 
 		TEST_METHOD(Scenario7){
 
-			DATA_PINST(TOWER(mTowerDTPRIME))->setTowerDeltaPressureOrTemperature(1.1);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setTowerDeltaPressureOrTemperature(1.1);
 
 			IAdvice* advice = mMgr->getAdvice(mTowerDTPRIME);
 
@@ -334,8 +334,8 @@ namespace DACoreTest
 
 		TEST_METHOD(Scenario8){
 
-			DATA_PINST(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(92.15);
-			DATA_PINST(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.70);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(92.15);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.70);
 
 			IAdvice* advice = mMgr->getAdvice(mTowerDTPRIME);
 
@@ -356,8 +356,8 @@ namespace DACoreTest
 
 		TEST_METHOD(Scenario9a){
 
-			DATA_PINST(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(95.7);
-			DATA_PINST(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.3);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setHeavyKeyCurrent(95.7);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.3);
 
 			IAdvice* advice = mMgr->getAdvice(mTowerDTPRIME);
 
@@ -405,7 +405,7 @@ namespace DACoreTest
 
 		TEST_METHOD(ScenarioNoAdvice){
 
-			DATA_PINST(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.6);
+			PRIMARY_INSTRUMENTS(TOWER(mTowerDTPRIME))->setLightKeyCurrent(2.6);
 
 			IAdvice* advice = mMgr->getAdvice(mTowerDTPRIME);
 

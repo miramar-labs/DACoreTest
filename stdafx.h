@@ -10,6 +10,17 @@
 // Headers for CppUnitTest
 #include "CppUnitTest.h"
 
+//BOOST
+#include <boost/signals2.hpp>
+#include <boost/filesystem.hpp>
+#include <boost/tokenizer.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/date_time/local_time/local_time.hpp>
+
 // DACore :
 #define UNIT_TESTING
 
