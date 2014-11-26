@@ -36,5 +36,8 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include=".gitattributes" />
+    <None Include="AlgorithmUnitTest.playlist" />
+    <None Include="AuxUnitTest.playlist" />
+    <None Include="README.md" />
   </ItemGroup>
 </Project>

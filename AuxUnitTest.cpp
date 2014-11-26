@@ -30,7 +30,7 @@ namespace DACoreTest
 
 		TEST_METHOD(SerializationTest)
 		{
-			Logger::WriteMessage(boost::filesystem::current_path().c_str());
+			//Logger::WriteMessage(boost::filesystem::current_path().c_str());
 
 			resetDataDir();
 
