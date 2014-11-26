@@ -290,9 +290,7 @@ namespace DACoreTest
 			delete advice;
 		}
 
-		TEST_METHOD(Scenario6){//CHECKME - no params???
-
-			Assert::Fail();	//TODO
+		TEST_METHOD(Scenario6){
 
 			IAdvice* advice = mMgr->getAdvice(mTowerDTPRIME);
 
