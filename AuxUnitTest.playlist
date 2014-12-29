@@ -1,1 +1,1 @@
-<Playlist Version="1.0"><Add Test="DACoreTest::AuxUnitTest::SerializationTest" /></Playlist>
+<Playlist Version="1.0"><Add Test="DACoreTest::AuxUnitTest::SerializationTest1" /><Add Test="DACoreTest::AuxUnitTest::SerializationTest2" /><Add Test="DACoreTest::AuxUnitTest::SerializationTestAddDeleteAll" /><Add Test="DACoreTest::AuxUnitTest::SerializationTestGenerateHistorian" /></Playlist>

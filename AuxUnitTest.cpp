@@ -5,6 +5,13 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace DACoreTest
 {
+	/*
+		NOTE: don't 'Run All' as the core isn't thread safe yet.....
+	*/
+
+	static const char *TOWER_DATA_DIR = ".\\data\\towers\\";
+	static const char *HISTORIAN_DATA_DIR = ".\\data\\historians\\";
+
 	TEST_CLASS(AuxUnitTest)
 	{
 	private:
@@ -15,11 +22,38 @@ namespace DACoreTest
 		static void resetDataDir(){
 			std::string current = boost::filesystem::current_path().string();
 
-			boost::filesystem::remove_all(current + "\\data\\historians\\");
-			boost::filesystem::create_directories(current + "\\data\\historians\\");
+			if (boost::filesystem::exists(current + HISTORIAN_DATA_DIR)){
+				boost::filesystem::remove_all(current + HISTORIAN_DATA_DIR);
+				
+			}
+			else{
+				boost::filesystem::create_directories(current + HISTORIAN_DATA_DIR);
+			}
 
-			boost::filesystem::remove_all(current + "\\data\\towers\\");
-			boost::filesystem::create_directories(current + "\\data\\towers\\");
+			if (boost::filesystem::exists(current + TOWER_DATA_DIR)){
+				boost::filesystem::remove_all(current + TOWER_DATA_DIR);
+				
+			}
+			else{
+				boost::filesystem::create_directories(current + TOWER_DATA_DIR);
+			}
+		}
+
+		static int countFilesInFolder(const char* folder){
+			int count = 0;
+			boost::filesystem::path dataDir(folder);
+			boost::filesystem::directory_iterator end_iter;
+			if (boost::filesystem::exists(folder) && boost::filesystem::is_directory(folder))
+			{
+				for (boost::filesystem::directory_iterator dir_iter(dataDir); dir_iter != end_iter; ++dir_iter)
+				{
+					if (boost::filesystem::is_regular_file(dir_iter->status()))
+					{
+						count++;
+					}
+				}
+			}
+			return count;
 		}
 
 		TEST_CLASS_INITIALIZE(DACoreInit){
@@ -28,7 +62,57 @@ namespace DACoreTest
 
 		}
 
-		TEST_METHOD(SerializationTest)
+		TEST_METHOD(SerializationTest1)		// this one creates a historian and then deletes it - checks that the json file is gone
+		{
+			//Logger::WriteMessage(boost::filesystem::current_path().c_str());
+
+			resetDataDir();
+			Assert::AreEqual(countFilesInFolder(HISTORIAN_DATA_DIR), 0);
+
+			HistorianId hid1 = mMgr->createHistorian();
+
+			mMgr->saveHistorian(hid1);
+
+			mMgr->deleteHistorian(hid1);
+
+			Assert::AreEqual(countFilesInFolder(HISTORIAN_DATA_DIR), 0);
+
+		}
+
+		TEST_METHOD(SerializationTest2)		// this one creates a historian with a tower, and 
+											// then deletes the tower and historian - checks that the json files are gone
+		{
+			//Logger::WriteMessage(boost::filesystem::current_path().c_str());
+
+			resetDataDir();
+			Assert::AreEqual(countFilesInFolder(HISTORIAN_DATA_DIR), 0);
+
+			HistorianId hid1 = mMgr->createHistorian();
+
+			TowerId id1 = mMgr->createTower(hid1, ITower::Type::DTPRIME);
+			mMgr->getTower(id1)->setName("Acid Tower");
+			BOTTOMS_COMPOSITION(mMgr->getTower(id1))->setHeavyKey("Water");
+			BOTTOMS_COMPOSITION(mMgr->getTower(id1))->setLightKey("Acid");
+
+			mMgr->saveHistorian(hid1);
+			mMgr->saveTower(id1);
+
+			Assert::AreEqual(countFilesInFolder(HISTORIAN_DATA_DIR), 1);
+			Assert::AreEqual(countFilesInFolder(TOWER_DATA_DIR), 1);
+
+			mMgr->removeTowerFromHistorian(hid1, id1);
+			mMgr->deleteTower(hid1, id1);
+			mMgr->saveHistorian(hid1);
+			Assert::AreEqual(countFilesInFolder(HISTORIAN_DATA_DIR), 1);
+			Assert::AreEqual(countFilesInFolder(TOWER_DATA_DIR), 0);
+
+			mMgr->deleteHistorian(hid1);
+
+			Assert::AreEqual(countFilesInFolder(HISTORIAN_DATA_DIR), 0);
+			Assert::AreEqual(countFilesInFolder(TOWER_DATA_DIR), 0);
+		}
+
+		TEST_METHOD(SerializationTestAddDeleteAll)
 		{
 			//Logger::WriteMessage(boost::filesystem::current_path().c_str());
 
@@ -56,7 +140,7 @@ namespace DACoreTest
 
 			mMgr->saveHistorians();
 			mMgr->saveTowers();
-			
+
 			// now delete everything in the manager...
 			mMgr->removeTowerFromHistorian(hid1, id1);
 			mMgr->deleteTower(hid1, id1);
@@ -77,15 +161,38 @@ namespace DACoreTest
 			mMgr->enumerateHistorians(hids);
 			Assert::AreEqual((int)hids.size(), 0);
 
-			// now load them back in from json....
-			mMgr->loadHistorians();
-			mMgr->loadTowers();
+		}
 
-			mMgr->enumerateHistorians(hids);
-			Assert::AreEqual((int)hids.size(), 1);
 
-			mMgr->enumerateTowers(tids);
-			Assert::AreEqual((int)tids.size(), 3);
+		// LAST TEST - generates dummy JSON data for web app
+		TEST_METHOD(SerializationTestGenerateHistorian)
+		{
+			//Logger::WriteMessage(boost::filesystem::current_path().c_str());
+
+			resetDataDir();
+
+			// create 1 named (base) historian:
+			HistorianId hid1 = mMgr->createHistorian();
+			mMgr->getHistorian(hid1)->setType(IHistorian::Type::PI);
+
+			// create 3 named DTPRIME towers:
+			TowerId id1 = mMgr->createTower(hid1, ITower::Type::DTPRIME);
+			mMgr->getTower(id1)->setName("Acid Tower");
+			BOTTOMS_COMPOSITION(mMgr->getTower(id1))->setHeavyKey("Water");
+			BOTTOMS_COMPOSITION(mMgr->getTower(id1))->setLightKey("Acid");
+
+			TowerId id2 = mMgr->createTower(hid1, ITower::Type::DTPRIME);
+			mMgr->getTower(id2)->setName("Benzene Tower");
+			BOTTOMS_COMPOSITION(mMgr->getTower(id2))->setHeavyKey("Vodka");
+			BOTTOMS_COMPOSITION(mMgr->getTower(id2))->setLightKey("Acid");
+
+			TowerId id3 = mMgr->createTower(hid1, ITower::Type::DTPRIME);
+			mMgr->getTower(id3)->setName("Butane Tower");
+			BOTTOMS_COMPOSITION(mMgr->getTower(id3))->setHeavyKey("Gin");
+			BOTTOMS_COMPOSITION(mMgr->getTower(id3))->setLightKey("Acid");
+
+			mMgr->saveTowers();
+
 		}
 
 	};

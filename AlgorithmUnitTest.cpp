@@ -110,8 +110,6 @@ namespace DACoreTest
 
 		TEST_METHOD(ScenarioIncomplete){
 
-			CONFIG(TOWER(mTowerDTPRIME))->setIsIncomplete(true);
-
 			IAdvice* advice = mMgr->getAdvice(mTowerDTPRIME);
 
 			Logger::WriteMessage(advice->getPrimaryMessage().c_str());
