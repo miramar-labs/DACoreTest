@@ -41,6 +41,8 @@
 #include "IHeatingMediumFeed.h"
 #include "IExternalReflux.h"
 #include "IReboiler.h"
+#include "IValidate.h"
+#include "IControlLimits.h"
 
 using namespace dacore;
 

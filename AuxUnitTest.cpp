@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 
+#undef max
+#undef min
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace DACoreTest
@@ -162,6 +165,41 @@ namespace DACoreTest
 			Assert::AreEqual((int)hids.size(), 0);
 
 		}
+
+		TEST_METHOD(SerializationTest3)		// serialize an INVALID_DBL and read it back in - verify it is the same
+		{
+			//Logger::WriteMessage(boost::filesystem::current_path().c_str());
+
+			resetDataDir();
+			Assert::AreEqual(countFilesInFolder(HISTORIAN_DATA_DIR), 0);
+			Assert::AreEqual(countFilesInFolder(TOWER_DATA_DIR), 0);
+
+			HistorianId hid1 = mMgr->createHistorian();
+			TowerId tid1 = mMgr->createTower(hid1, ITower::Type::DISTILLATION);
+
+			Assert::AreEqual(countFilesInFolder(HISTORIAN_DATA_DIR), 1);
+			Assert::AreEqual(countFilesInFolder(TOWER_DATA_DIR), 1);
+
+			//at this point ITowerConfig.IControlLimits should contain INVALID_DBL's ... and should be written out to JSON...
+			//note: INVALID_DBL = 1.797693134862316e+308
+			Assert::AreEqual(mMgr->getTower(tid1)->getConfig()->getControlLimits()->getHeavyKeyMin(), IValidate::INVALID_DBL);
+
+			// now lets reload the tower and see what comes back.....(id's should be the same)
+			//mMgr->loadTowers();
+
+			//double dVal = mMgr->getTower(tid1)->getConfig()->getControlLimits()->getHeavyKeyMin();
+
+			//Assert::IsTrue(IValidate::isInvalidDbl(dVal));
+
+			//dVal = dVal - 1.0;	// IValidate::INVALID_DBL-1 should be valid.....
+
+			//Assert::IsFalse(IValidate::isInvalidDbl(dVal));
+
+
+		}
+
+
+
 
 
 		// LAST TEST - generates dummy JSON data for web app
